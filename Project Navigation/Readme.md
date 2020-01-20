@@ -23,7 +23,6 @@ You will need to install PyTorch, the ML-Agents toolkit, and a few more Python p
 ### Environment details
 
 INFO:unityagents:
-'Academy' started successfully!
 
 Unity Academy name: Academy
         
