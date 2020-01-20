@@ -20,6 +20,34 @@ The task is episodic, and in order to solve the environment, your agent must get
 You will need to install PyTorch, the ML-Agents toolkit, and a few more Python packages required to complete the project.
 (For Windows users) The ML-Agents toolkit supports Windows 10. While it might be possible to run the ML-Agents toolkit using other versions of Windows, it has not been tested on other versions. Furthermore, the ML-Agents toolkit has not been tested on a Windows VM such as Bootcamp or Parallels.
 
+### Environment details
+
+INFO:unityagents:
+'Academy' started successfully!
+
+Unity Academy name: Academy
+        
+        Number of Brains: 1
+        Number of External Brains : 1
+        Lesson number : 0
+        Reset Parameters :
+		
+Unity brain name: BananaBrain
+
+        Number of Visual Observations (per agent): 0
+        Vector Observation space type: continuous
+        Vector Observation space size (per agent): 37
+        Number of stacked Vector Observation: 1
+        Vector Action space type: discrete
+        Vector Action space size (per agent): 4
+        Vector Action descriptions: , , , 
+        States look like: [ 1.          0.          0.          0.          0.84408134  0.          0.
+                            1.          0.          0.0748472   0.          1.          0.          0.
+                            0.25755     1.          0.          0.          0.          0.74177343  0.
+                            0.          1.          0.          0.          0.25854847  0.          0.
+                            1.          0.          0.09355672  0.          1.          0.          0.
+                            0.31969345  0.]
+
 ### Downloading the environment
 
 
@@ -35,5 +63,17 @@ You will need to install PyTorch, the ML-Agents toolkit, and a few more Python p
 
 2. Place the file in the DRLND GitHub repository, in the `p1_navigation/` folder, and unzip (or decompress) the file. 
 
+3. You then need to configure a Python 3.6 / PyTorch 0.4.0 environment with the needed requirements as described in the [Udacity repository](https://github.com/udacity/deep-reinforcement-learning#dependencies)
+
+4. You have to clone this project and have it accessible in your Python environment
+
+#### Train a agent
+
 Here you will need to train an agent to solve the provided environment. Run the cells in the sequence.
 
+
+Execute the provided notebook within this Nanodegree Udacity Online Workspace for "project #1 Navigation" (or build your own local environment and make necessary adjustements for the path to the UnityEnvironment in the code )
+
+###### Note that
+Manually playing with the environment has not been implemented as it is not available with Udacity Online Worspace (No Virtual Screen)
+Watching the trained agent playing in the environment has not been implemented neither, as it is not available with Udacity Online Worspace (No Virtual Screen).
