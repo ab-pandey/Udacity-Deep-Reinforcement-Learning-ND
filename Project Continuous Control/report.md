@@ -27,7 +27,7 @@ The observation space consists of 33 variables corresponding to position, rotati
 - Reset Parameters: Two, corresponding to goal size, and goal movement speed.
 - Benchmark Mean Reward: 30
 
-**In my implementation I have chosen to solve the First version of the environment (Single Agent) using the off-policy DDPG algorithm.** The task is episodic, and **in order to solve the environment, the agent must get an average score of +30 over 100 consecutive episodes.**
+**First version of the environment (Single Agent) is choosen for implementation using the off-policy DDPG algorithm.** The task is episodic, and **in order to solve the environment, the agent must get an average score of +30 over 100 consecutive episodes.**
 
 
 ## Agent Implementation
@@ -47,21 +47,20 @@ More details available on the Open AI's [Spinning Up](https://spinningup.openai.
 
 ![DDPG algorithm from Spinning Up website](./images/DDPG.svg)
 
-This algorithm screenshot is taken from the [DDPG algorithm from the Spinning Up website](https://spinningup.openai.com/en/latest/algorithms/ddpg.html)
 
 
 ### Code implementation
 
-The code used here is derived from the "DDPG bipedal" tutorial from the [Deep Reinforcement Learning Nanodegree](https://www.udacity.com/course/deep-reinforcement-learning-nanodegree--nd893), and has been slightly adjusted for being used with the reacher environment.
+The code used here is derived from the "DDPG pendulum" tutorial from the [Deep Reinforcement Learning Nanodegree](https://www.udacity.com/course/deep-reinforcement-learning-nanodegree--nd893), and has been slightly adjusted for current environment.
 
-The code is written in [Python 3.6](https://www.python.org/downloads/release/python-360/) and is relying on [PyTorch 0.4.0](https://pytorch.org/docs/0.4.0/) framework.
+The code is written in [Python 3](https://www.python.org/downloads/release/python-360/) and is relying on [PyTorch](https://pytorch.org/docs/0.4.0/) framework.
 
 The code consist of :
 
-- `model.py` : Implement the **Actor** and the **Critic** classes.
+- `1. model` : Implement the **Actor** and the **Critic** classes.
     - The Actor and Critic classes each implements a *Target* and a *Local* Neural Networks used for the training.
     
-- `ddpg_agent.py` : Implement the **DDPG agent** and a **Replay Buffer memory** used by the DDPG agent.
+- `2. defining ddpg agent` : Implement the **DDPG agent** and a **Replay Buffer memory** used by the DDPG agent.
     - The Actor's *Local* and *Target* neural networks, and the Critic's *Local* and *Target* neural networks are instanciated by the Agent's constructor
     - The `learn()` method updates the policy and value parameters using given batch of experience tuples.
         ```
@@ -71,12 +70,11 @@ The code consist of :
             critic_target(state, action) -> Q-value
         ```
   
-- `Reacher_Project.ipynb` : This Jupyter notebooks allows to instanciate and train the agent. More in details it allows to :
+- `ContinuousControl.ipynb` : The Jupyter notebooks allows to instanciate and train the agent. More in details it allows to :
   - Prepare the Unity environment and Import the necessary packages 
   - Check the Unity environment
-  - Define a helper function to instanciate and train a DDPG agent
-  - Train an agent using DDPG (including Hyperparameters evaluation)
-  - Plot the score results
+  - Define a model and agent to instanciate and train a DDPG agent
+  - Train an agent using DDPG and plot score result
 
 ### DDPG parameters and results
 
@@ -84,15 +82,10 @@ The code consist of :
 
 As a starting point, the initial version of the DDPG agent used the parameters values described in the paper [Continuous control with deep reinforcement learning](https://arxiv.org/abs/1509.02971). 
 
-As shown in the notebook, the initial results were not great with the project's reacher environment. I first tried to play with some of the parameters which I thought were important (network size, learning rate, discount factor...) but the results did not improved much.
-
-At that point I decided to adjust the code so that being able to specify all the hyperparameters from the the training helper function used in the notebook. While this would allow to perform a proper hyperparameters search, it would be quite a heavy work considering the number of parameters and their possible values. But as it helped exploring the important parameters and compared different versions, I was able to find some interesting facts :
-
-- When starting to explore with the hyper parameters, I quickly discovered that **Increasing the number of steps per episode** was a first important changes  for the agent to start learning (The more the better, while it impacts the training time. Also worth mentioning that the Udacity environment seems to finish an episode after 1000 steps)
-- **Reducing the Sigma values** used in the Ornstein-Uhlenbeck noise process was another important change for the agent to start learning
-- In the  paper [Continuous control with deep reinforcement learning](https://arxiv.org/abs/1509.02971) batch normalization was not used. However it turns out that it helped a lot in our case. More surprising, I usually add Batch Normalization before the Activation layers in Neural Networks. In this project, it looks like **adding the batch normalization layer after the activation layer** works better.
-- As the environment state and action size is rather simple, **using smaller Neural networks** (less units) helped to improved the learning. 
-- The last important tuning was to **adjust the learning rates used** : using some identical, and slightly higher values for both the actor and critic networks was the final change for the agent to become a great learner being able to solve the environment. 
+-  **Increasing the number of steps per episode** is important changes  for the agent to start learning better 
+- In the  paper [Continuous control with deep reinforcement learning](https://arxiv.org/abs/1509.02971) batch normalization is not used. However it turns out that it helps in this case and is added layer after the activation layer.
+- As the environment state and action size is rather simple, **using smaller Neural networks** is used.
+- The learning rates has been increased for both the actor and critic networks as agent takes time to learn.
 
 #### DDPG parameters
 
@@ -110,18 +103,6 @@ tau = 1e-3              # for soft update of target parameters
 lr_actor = 2e-4         # learning rate of the actor 
 lr_critic = 2e-4        # learning rate of the critic
 weight_decay = 0        # L2 weight decay
-actor_fc1_units = 128   # Number of units for the layer 1 in the actor model
-actor_fc1_units = 128   # Number of units for the layer 2 in the actor model
-critic_fcs1_units = 128 # Number of units for the layer 1 in the critic model
-critic_fc2_units = 128  # Number of units for the layer 2 in the critic model
-bn_mode = 2             # Use Batch Norm. - 0=disabled, 1=BN before Activation, 2=BN after Activation 
-                        # (3, 4 are alt. versions of 1, 2)
-
-add_ounoise = True      # Add Ornstein-Uhlenbeck noise
-mu = 0.                 # Ornstein-Uhlenbeck noise parameter
-theta = 0.15            # Ornstein-Uhlenbeck noise parameter
-sigma = 0.1             # Ornstein-Uhlenbeck noise parameter
-```
 
 The **Actor Neural Networks** use the following architecture :
 
@@ -146,7 +127,7 @@ Input nodes (33)
 ```
             
 
-Both Neural Networks use the Adam optimizer with a learning rate of 2e-4 and are trained using a batch size of 128.
+Both Neural Networks use the Adam optimizer with a learning rate of 6e-4 and are trained using a batch size of 128.
 
 #### Results
 
@@ -177,6 +158,3 @@ See also :
 - A [project repository](https://github.com/ikostrikov/pytorch-ddpg-naf/blob/master/param_noise.py) that might be helpfull to implement Parameter Noise in Pytorch (as the Open AI baseline models are currently implemented with Tensorflow)
 
 
-### Misc : Configuration used 
-
-This agent has been trained on my "Deep Learning Dev Box", which is basically a Linux GPU Server, running Docker containers (using Nvidia Docker 2), serving Jupyter Lab notebooks which are accessed remotely via a web interface (or a ssh connection) : unfortunately this setup does not seem suitable to run Unity ML agent, with the GPU and providing a display for for the agent (See [Unity documentation](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Using-Docker.md) for more details). Thus the headless / no visualization version of the Unity environment was used.
