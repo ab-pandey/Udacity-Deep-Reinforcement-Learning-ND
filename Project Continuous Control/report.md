@@ -1,10 +1,10 @@
-# Project 2 : Reacher Project (Continuous Control)
+# Project Continuous Control
 
 ## Project's goal
 
 In this environment, a double-jointed arm can move to target locations. A reward of +0.1 is provided for each step that the agent's hand is in the goal location. Thus, **the goal of the agent is to maintain its position at the target location for as many time steps as possible.**
 
-![In Project 2, train an agent to maintain its position at the target location for as many time steps as possible.](images/reacher.gif)
+![In Project 2, train an agent to maintain its position at the target location for as many time steps as possible.](images/env.gif)
 
 ## Environment details
 
@@ -45,7 +45,7 @@ More details available on the Open AI's [Spinning Up](https://spinningup.openai.
 
 ### Algorithm
 
-![DDPG algorithm from Spinning Up website](./images/DDPG.svg)
+![DDPG algorithm from Spinning Up website](./images/ddpg.svg)
 
 
 
