@@ -107,7 +107,7 @@ weight_decay = 0        # L2 weight decay
 The **Actor Neural Networks** use the following architecture :
 
 ```
-Input nodes (33) 
+`Input nodes (33) 
   -> Fully Connected Layer (128 nodes, Relu activation) 
     -> Batch Normlization
       -> Fully Connected Layer (128 nodes, Relu activation) 
@@ -118,7 +118,7 @@ Input nodes (33)
 The **Critic Neural Networks** use the following architecture :
 
 ```
-Input nodes (33) 
+`Input nodes (33) 
   -> Fully Connected Layer (128 nodes, Relu activation) 
     -> Batch Normlization
       -> Include Actions at the second fully connected layer
@@ -126,14 +126,12 @@ Input nodes (33)
           -> Ouput node (1 node, no activation)
 ```
             
-
+```
 Both Neural Networks use the Adam optimizer with a learning rate of 6e-4 and are trained using a batch size of 128.
 
 #### Results
 
-Given the chosen architecture and parameters, our results are :
-
-![Training results](images/training_results.png)
+Given the chosen architecture and parameters, Agent crossed +30 mark at the 1420th episode.
 
 **These results meets the project's expectation as the agent is able to receive an average reward (over 100 episodes) of at least +30, and in 300 episodes only** 
 
