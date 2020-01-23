@@ -127,8 +127,13 @@ The code consist of :
 
 #### Results
 
-Given the chosen architecture and parameters, the agent reached the benchmark of 0.5 in 
+Given the chosen architecture and parameters, the agent reached the benchmark of 0.5 in episode 2186. Given below is the plot of rewards and average rewards of both the agents.
 
+**Score Plot**
+[score](images/score.jpg)
+
+**Average Score plot**
+[Average_score](images/mean_score)
 
 **These results meets the project's expectation as the agent is able to receive an average reward (over 100 episodes) of at least +0.5 in 2487 episodes** 
 
