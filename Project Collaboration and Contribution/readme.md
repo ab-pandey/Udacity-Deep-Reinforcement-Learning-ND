@@ -44,5 +44,5 @@ The task is episodic, and in order to solve the environment, your agents must ge
 
 ### Instructions
 
-Follow the instructions in `Tennis.ipynb` to solve the environment and train the agents to play tennis!  
+Follow the instructions in `CollaborationAndCompetition.ipynb` to solve the environment and train the agents to play tennis!  
 
