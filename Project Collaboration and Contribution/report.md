@@ -130,10 +130,10 @@ The code consist of :
 Given the chosen architecture and parameters, the agent reached the benchmark of 0.5 in episode 2186. Given below is the plot of rewards and average rewards of both the agents.
 
 **Score Plot**
-![score](images/score.jpg)
+![score](./images/score.JPG)
 
 **Average Score plot**
-![Average_score](images/mean_score)
+![Average_score](./images/mean_score.JPG)
 
 **These results meets the project's expectation as the agent is able to receive an average reward (over 100 episodes) of at least +0.5 in 2487 episodes** 
 
